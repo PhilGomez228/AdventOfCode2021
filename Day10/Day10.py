@@ -46,26 +46,14 @@ part2Points = []
 for i in incomplete:
     linePoints = 0
     while(i):
-        if len(i) == 0:
-            if i[0] == '(':
-                linePoints = linePoints * 5 + 1
-            if i[0] == '[':
-                linePoints = linePoints * 5 + 2
-            if i[0] == '{':
-                linePoints = linePoints * 5 + 3
-            if i[0] == '<':
+        if i[-1] == '(':
+            linePoints = linePoints * 5 + 1
+        if i[-1] == '[':
+            linePoints = linePoints * 5 + 2
+        if i[-1] == '{':
+            linePoints = linePoints * 5 + 3
+        if i[-1] == '<':
                 linePoints = linePoints * 5 + 4
-        else:  
-
-            if i[-1] == '(':
-                linePoints = linePoints * 5 + 1
-            if i[-1] == '[':
-                linePoints = linePoints * 5 + 2
-            if i[-1] == '{':
-                linePoints = linePoints * 5 + 3
-            if i[-1] == '<':
-                linePoints = linePoints * 5 + 4
-        
         i.pop()
     part2Points.append(linePoints)
     
