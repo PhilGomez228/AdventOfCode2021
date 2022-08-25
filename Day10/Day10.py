@@ -1,36 +1,22 @@
 with open("Day10/Day10Inputs.txt",'r') as f:
     inputs = [lines.strip() for lines in f.readlines()]
 
-
-CURVED = 3
-SQUARE = 57
-SQUIGGLY = 1197
-CARROT = 25137
-
 totalPoints = 0
 incomplete = []
+bracketsDictionary = {'(': ')', '[': ']', '{': '}', '<': '>'}
+pointsDictionary = {')': 3, ']': 57, '}': 1197, '>': 25137}
 for i in inputs:
     openBrackets = []
     
     for j in i:
         
-        if j == '(' or j == '[' or j == '{' or j == '<':
+        if j in bracketsDictionary.keys():
             openBrackets.append(j)
         if j == ')' or j == ']' or j == '}' or j == '>':
-            if ((openBrackets[-1] == '(' and j == ')') or
-                (openBrackets[-1] == '[' and j == ']') or
-                (openBrackets[-1] == '{' and j == '}') or
-                (openBrackets[-1] == '<' and j == '>')):
+            if (bracketsDictionary[openBrackets[-1]] == j):
                     openBrackets.pop()
             else:
-                if j == ')':
-                    totalPoints += CURVED
-                elif j == ']':
-                    totalPoints += SQUARE
-                elif j == '}':
-                    totalPoints += SQUIGGLY
-                elif j == '>':
-                    totalPoints += CARROT
+                totalPoints += pointsDictionary[j]
                 openBrackets.clear()
                 break
     if openBrackets not in incomplete:
